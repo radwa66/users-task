@@ -4,6 +4,6 @@ import { UserDetailsComponent } from './users/components/user-details/user-detai
 
 export const routes: Routes = [
   {path:"users" , component:AllUsersComponent},
-  {path:"details", component:UserDetailsComponent},
+  {path:"details/:id", component:UserDetailsComponent},
   {path: "**", redirectTo:"users" , pathMatch: "full"}
 ];

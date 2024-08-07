@@ -11,4 +11,9 @@ export class UsersService {
   getAllUsers(){
     return this.http.get('https://reqres.in/api/users?page={page}')
   }
+
+
+getUserById(id: string) {
+  return this.http.get(`https://reqres.in/api/users/${id}`);
+}
 }

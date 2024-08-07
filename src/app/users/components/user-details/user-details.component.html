@@ -1,1 +1,49 @@
-<p>user-details works!</p>
+<!DOCTYPE html>
+<div
+  class="bg-[#eef1f9] px-16 md:px-[125px]  2xl:px-[20rem]  h-100 w-full flex flex-col gap-4" 
+>
+<button (click)="goBack()" class=" text-gray-900  bg-white w-[70px] px-4 py-2 rounded-lg mb-4  mt-8 flex justify-center items-center">
+  <fa-icon [icon]="['fas', 'arrow-left']" [size]="'2x'"></fa-icon> 
+</button>
+  <div class="bg-white shadow gap-10 rounded-lg flex py-8 px-6 items-center" *ngIf="!Loading">
+    <img
+      src="{{ data.avatar }}"
+      alt="img"
+      class="w-[154px] h-[154px] rounded-[500px] shadow justify-center items-center inline-flex"
+    />
+    <div class="flex flex-col">
+      <h3 class="text-[#0c0e2b] text-lg font-semibold">
+        {{ data.first_name }} {{ data.last_name }}
+      </h3>
+      <p class="text-base text-[#5f6c76] font-medium">{{ data.email }}</p>
+    </div>
+  </div>
+
+  <div
+    class="bg-white shadow rounded-lg flex flex-col py-8 px-16 justify-center-center mb-8" *ngIf="!Loading"
+  >
+    <div class="flex text-2xl font-medium gap-2 items-center">
+      <p class="text-[#5f6c76]">First Name:</p>
+      <p class="text-[#0c0e2b]">{{ data.first_name }}</p>
+    </div>
+    <hr class="mb-6" />
+    <div class="flex text-2xl font-medium gap-2 items-center">
+      <p class="text-[#5f6c76]">Last Name:</p>
+      <p class="text-[#0c0e2b]">{{ data.last_name }}</p>
+    </div>
+    <hr class="mb-6" />
+    <div class="flex text-2xl font-medium gap-2 items-center">
+      <p class="text-[#5f6c76]">Email:</p>
+      <p class="text-[#0c0e2b]">{{ data.email }}</p>
+    </div>
+    <hr class="mb-6" />
+    <div class="flex text-2xl font-medium gap-2 items-center">
+      <p class="text-[#5f6c76]">phone:</p>
+      <p class="text-[#0c0e2b]">+201097730273</p>
+    </div>
+  </div>
+<div class="w-100 flex justify-center items-center h-100" *ngIf="Loading">
+  <app-spinner ></app-spinner>
+</div>
+
+</div>
