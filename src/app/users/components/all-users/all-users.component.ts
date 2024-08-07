@@ -38,5 +38,13 @@ export class AllUsersComponent implements OnInit {
   }
 
 
+  searchById(searchTerm: string) {
+    if (searchTerm) {
+      this.filteredUsers = this.users.filter(user => user.id.toString().includes(searchTerm));
+    } else {
+      this.filteredUsers = this.users;
+    }
+  }
+
  
 }
