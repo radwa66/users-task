@@ -1,18 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule,FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+
 @Component({
   selector: 'app-user-details',
   standalone: true,
   imports: [SpinnerComponent, CommonModule ,FontAwesomeModule],
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.css',
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({ opacity: 0 })),
+      transition(':enter, :leave', [
+        animate(500)
+      ])
+    ])
+  ]
 })
 export class UserDetailsComponent implements OnInit  {
   data: any = {};
@@ -29,7 +37,10 @@ export class UserDetailsComponent implements OnInit  {
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
     this.getUserDetails();
+    });
   }
 
   getUserDetails() {
@@ -37,7 +48,7 @@ export class UserDetailsComponent implements OnInit  {
     this.usersService.getUserById(this.id).subscribe(
       (user: any) => {
         this.Loading = false;
-        this.data = user.data;
+        this.data = user;
       },
       (error) => {
         this.Loading = false;

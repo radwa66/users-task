@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { UsersService } from '../../users/services/users.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+
+import { UsersService } from '../../users/services/users.service';
 
 @Component({
   selector: 'app-header',
@@ -23,19 +24,20 @@ export class HeaderComponent {
   }
 
   getUsers() {
-    this.service.getAllUsers().subscribe((res: any) => {
-      this.searchResults = res.data;
+    this.service.getAllUsers().subscribe((users: any[]) => {
+      this.searchResults = users;
     });
   }
 
   onSearch(event: any) {
     this.searchTerm = event.target.value;
-    this.searchEvent.emit(this.searchTerm);
     if (this.searchTerm) {
       this.searchResults = this.searchResults.filter(user => user.id.toString().includes(this.searchTerm));
     } else {
-      this.searchResults = [];
+      this.getUsers(); 
     }
+
+    this.showDropdown = true;
   }
 
   onFocus() {
@@ -43,15 +45,14 @@ export class HeaderComponent {
   }
 
   onBlur() {
-    // Use a timeout to handle the click outside scenario
     setTimeout(() => {
       this.showDropdown = false;
-    }, 200); // Adjust timeout as needed
+    }, 200); 
   }
 
   clearSearch() {
     this.searchTerm = '';
-    this.searchResults = [];
+    this.getUsers(); 
     this.showDropdown = false;
   }
 }

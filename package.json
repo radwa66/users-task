@@ -22,6 +22,7 @@
     "@angular/router": "^18.1.0",
     "@fortawesome/angular-fontawesome": "^0.15.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "angular-animate": "^1.4.8",
     "autoprefixer": "^10.4.20",
     "flowbite": "^2.5.1",
     "postcss": "^8.4.41",
